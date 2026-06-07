@@ -17,479 +17,105 @@
     --text-muted: #a3a3a3;
     --gold: #f5c518;
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Nunito', sans-serif; overflow-x: hidden; }
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Nunito', sans-serif;
-    overflow-x: hidden;
-  }
-
-  /* NAVBAR */
   nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 48px;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, transparent 100%);
-    backdrop-filter: blur(0px);
-    transition: background 0.3s;
-  }
-  nav.scrolled {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 24px;
     background: rgba(10,10,10,0.98);
-    backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(255,255,255,0.05);
   }
-
-  .logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.2rem;
-    color: var(--red);
-    letter-spacing: 2px;
-    text-shadow: 0 0 30px rgba(229,9,20,0.5);
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 28px;
-    list-style: none;
-  }
-  .nav-links a {
-    color: var(--text-muted);
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 600;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--text); }
-  .nav-links a.active { color: var(--text); }
-
-  .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-
-  .search-bar {
-    display: flex;
-    align-items: center;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 6px;
-    padding: 6px 14px;
-    gap: 8px;
-    transition: background 0.2s;
-  }
-  .search-bar:focus-within {
-    background: rgba(255,255,255,0.12);
-    border-color: rgba(255,255,255,0.3);
-  }
-  .search-bar input {
-    background: none;
-    border: none;
-    outline: none;
-    color: var(--text);
-    font-size: 0.85rem;
-    width: 180px;
-    font-family: 'Nunito', sans-serif;
-  }
+  .logo { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--red); letter-spacing: 2px; }
+  .nav-links { display: flex; gap: 20px; list-style: none; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--text); }
+  .nav-right { display: flex; align-items: center; gap: 12px; }
+  .search-bar { display: flex; align-items: center; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; padding: 6px 12px; gap: 6px; }
+  .search-bar input { background: none; border: none; outline: none; color: var(--text); font-size: 0.82rem; width: 140px; font-family: 'Nunito', sans-serif; }
   .search-bar input::placeholder { color: var(--text-muted); }
-  .search-icon { color: var(--text-muted); font-size: 1rem; }
+  .avatar { width: 34px; height: 34px; border-radius: 6px; background: linear-gradient(135deg, var(--red), #ff6b35); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.82rem; cursor: pointer; }
 
-  .avatar {
-    width: 36px; height: 36px;
-    border-radius: 6px;
-    background: linear-gradient(135deg, var(--red), #ff6b35);
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 900;
-    font-size: 0.85rem;
-    cursor: pointer;
-    border: 2px solid transparent;
-    transition: border-color 0.2s;
-  }
-  .avatar:hover { border-color: var(--red); }
-
-  /* HERO */
   .hero {
-    position: relative;
-    height: 92vh;
-    min-height: 600px;
-    display: flex;
-    align-items: flex-end;
-    overflow: hidden;
+    position: relative; height: 88vh; min-height: 500px;
+    display: flex; align-items: flex-end; overflow: hidden; margin-top: 56px;
   }
-
   .hero-bg {
-    position: absolute;
-    inset: 0;
-    background: 
-      linear-gradient(to right, rgba(10,10,10,0.95) 30%, transparent 70%),
-      linear-gradient(to top, rgba(10,10,10,1) 0%, transparent 40%),
-      url('https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=1400&q=80') center/cover;
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, rgba(10,10,10,0.95) 30%, transparent 70%),
+                linear-gradient(to top, rgba(10,10,10,1) 0%, transparent 40%),
+                url('https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=1400&q=80') center/cover;
   }
-
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    padding: 0 48px 80px;
-    max-width: 580px;
-  }
-
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(229,9,20,0.2);
-    border: 1px solid rgba(229,9,20,0.4);
-    border-radius: 4px;
-    padding: 5px 12px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--red);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 16px;
-  }
-
-  .hero-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 5rem;
-    line-height: 0.95;
-    letter-spacing: 2px;
-    margin-bottom: 20px;
-    text-shadow: 0 4px 30px rgba(0,0,0,0.8);
-  }
-
-  .hero-meta {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 16px;
-    font-size: 0.85rem;
-  }
+  .hero-content { position: relative; z-index: 2; padding: 0 24px 60px; max-width: 500px; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(229,9,20,0.2); border: 1px solid rgba(229,9,20,0.4); border-radius: 4px; padding: 4px 10px; font-size: 0.72rem; font-weight: 700; color: var(--red); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
+  .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; line-height: 0.95; letter-spacing: 2px; margin-bottom: 16px; }
+  .hero-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; font-size: 0.82rem; }
   .hero-rating { color: var(--gold); font-weight: 700; }
   .hero-year { color: var(--text-muted); }
-  .hero-genre {
-    background: var(--surface2);
-    border-radius: 4px;
-    padding: 3px 10px;
-    font-size: 0.78rem;
-    color: var(--text-muted);
-  }
+  .hero-genre { background: var(--surface2); border-radius: 4px; padding: 3px 8px; font-size: 0.75rem; color: var(--text-muted); }
+  .hero-desc { color: rgba(255,255,255,0.75); font-size: 0.9rem; line-height: 1.6; margin-bottom: 24px; }
+  .hero-buttons { display: flex; gap: 12px; }
+  .btn-play { display: flex; align-items: center; gap: 8px; background: var(--red); color: white; border: none; border-radius: 8px; padding: 12px 24px; font-size: 0.95rem; font-weight: 700; font-family: 'Nunito', sans-serif; cursor: pointer; transition: background 0.2s; }
+  .btn-play:hover { background: var(--red-dark); }
+  .btn-info { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.12); color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 12px 20px; font-size: 0.95rem; font-weight: 700; font-family: 'Nunito', sans-serif; cursor: pointer; }
 
-  .hero-desc {
-    color: rgba(255,255,255,0.75);
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin-bottom: 32px;
-    max-width: 460px;
-  }
+  .sections { padding: 0 24px 80px; margin-top: -40px; position: relative; z-index: 2; }
+  .section { margin-bottom: 40px; }
+  .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 1px; }
+  .section-see-all { color: var(--red); font-size: 0.8rem; font-weight: 700; cursor: pointer; }
 
-  .hero-buttons {
-    display: flex;
-    gap: 14px;
-  }
-
-  .btn-play {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--red);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 14px 32px;
-    font-size: 1rem;
-    font-weight: 700;
-    font-family: 'Nunito', sans-serif;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.15s;
-  }
-  .btn-play:hover { background: var(--red-dark); transform: scale(1.03); }
-
-  .btn-info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: rgba(255,255,255,0.12);
-    color: white;
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 8px;
-    padding: 14px 28px;
-    font-size: 1rem;
-    font-weight: 700;
-    font-family: 'Nunito', sans-serif;
-    cursor: pointer;
-    transition: background 0.2s;
-    backdrop-filter: blur(10px);
-  }
-  .btn-info:hover { background: rgba(255,255,255,0.2); }
-
-  /* SECTIONS */
-  .sections {
-    padding: 0 48px 80px;
-    position: relative;
-    z-index: 2;
-    margin-top: -60px;
-  }
-
-  .section { margin-bottom: 50px; }
-
-  .section-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-
-  .section-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.6rem;
-    letter-spacing: 1px;
-    color: var(--text);
-  }
-
-  .section-see-all {
-    color: var(--red);
-    font-size: 0.82rem;
-    font-weight: 700;
-    cursor: pointer;
-    text-decoration: none;
-    letter-spacing: 0.5px;
-    opacity: 0.8;
-    transition: opacity 0.2s;
-  }
-  .section-see-all:hover { opacity: 1; }
-
-  .video-row {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 16px;
-  }
-
-  .video-card {
-    border-radius: 10px;
-    overflow: hidden;
-    background: var(--surface);
-    cursor: pointer;
-    transition: transform 0.25s, box-shadow 0.25s;
-    position: relative;
-    group: true;
-  }
-  .video-card:hover {
-    transform: scale(1.05) translateY(-4px);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(229,9,20,0.3);
-    z-index: 10;
-  }
-
-  .card-thumb {
-    width: 100%;
-    aspect-ratio: 16/9;
-    object-fit: cover;
-    display: block;
-  }
-
-  .card-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 50%);
-    opacity: 0;
-    transition: opacity 0.25s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  .video-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
+  .video-card { border-radius: 10px; overflow: hidden; background: var(--surface); cursor: pointer; transition: transform 0.25s, box-shadow 0.25s; position: relative; }
+  .video-card:hover { transform: scale(1.04) translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,0.7); }
+  .card-thumb { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+  .card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 50%); opacity: 0; transition: opacity 0.25s; display: flex; align-items: center; justify-content: center; }
   .video-card:hover .card-overlay { opacity: 1; }
-
-  .play-btn-circle {
-    width: 52px; height: 52px;
-    border-radius: 50%;
-    background: rgba(229,9,20,0.9);
-    border: 3px solid white;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.2rem;
-    transform: scale(0.8);
-    transition: transform 0.2s;
-  }
-  .video-card:hover .play-btn-circle { transform: scale(1); }
-
-  .card-info {
-    padding: 12px 14px 14px;
-  }
-  .card-title {
-    font-weight: 700;
-    font-size: 0.92rem;
-    margin-bottom: 5px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .card-meta {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.78rem;
-    color: var(--text-muted);
-  }
+  .play-btn-circle { width: 48px; height: 48px; border-radius: 50%; background: rgba(229,9,20,0.9); border: 3px solid white; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+  .card-info { padding: 10px 12px 12px; }
+  .card-title { font-weight: 700; font-size: 0.88rem; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .card-meta { display: flex; align-items: center; gap: 8px; font-size: 0.75rem; color: var(--text-muted); }
   .card-rating { color: var(--gold); font-weight: 700; }
 
-  /* FEATURED WIDE CARD */
-  .featured-row {
-    display: grid;
-    grid-template-columns: 1.8fr 1fr 1fr;
-    gap: 16px;
-  }
-  .featured-card {
-    border-radius: 10px;
-    overflow: hidden;
-    position: relative;
-    cursor: pointer;
-    aspect-ratio: 16/9;
-    transition: transform 0.25s, box-shadow 0.25s;
-  }
-  .featured-card:hover {
-    transform: scale(1.02);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.7);
-  }
-  .featured-card img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-  }
-  .featured-label {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-    padding: 30px 18px 16px;
-  }
-  .featured-label-title { font-weight: 700; font-size: 0.95rem; }
-  .featured-label-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 3px; }
-
-  /* VIDEO MODAL */
-  .modal-backdrop {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.92);
-    z-index: 9000;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(8px);
-  }
-  .modal-backdrop.open { display: flex; }
-
-  .modal-box {
-    background: var(--surface);
-    border-radius: 14px;
-    overflow: hidden;
-    width: 90%;
-    max-width: 860px;
-    box-shadow: 0 30px 100px rgba(0,0,0,0.9);
-    animation: modalIn 0.3s ease;
-  }
-  @keyframes modalIn {
-    from { opacity: 0; transform: scale(0.92) translateY(20px); }
-    to { opacity: 1; transform: scale(1) translateY(0); }
-  }
-
-  .modal-video {
-    width: 100%;
-    aspect-ratio: 16/9;
-    background: #000;
-  }
-  .modal-video iframe {
-    width: 100%; height: 100%;
-    border: none;
-  }
-
-  .modal-info {
-    padding: 24px 28px 28px;
-  }
-  .modal-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2rem;
-    letter-spacing: 1px;
-    margin-bottom: 10px;
-  }
-  .modal-desc {
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    line-height: 1.6;
-    margin-bottom: 18px;
-  }
-  .modal-actions {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-  }
-  .modal-close {
-    margin-left: auto;
-    background: var(--surface3);
-    border: none;
-    color: var(--text-muted);
-    padding: 10px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-family: 'Nunito', sans-serif;
-    font-weight: 700;
-    font-size: 0.85rem;
-    transition: background 0.2s, color 0.2s;
-  }
-  .modal-close:hover { background: var(--surface2); color: var(--text); }
-
   /* UPLOAD SECTION */
-  .upload-section {
-    margin: 0 48px 60px;
-    background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
-    border: 1px dashed rgba(229,9,20,0.4);
-    border-radius: 16px;
-    padding: 40px;
-    text-align: center;
-  }
-  .upload-icon { font-size: 3rem; margin-bottom: 16px; }
-  .upload-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.8rem;
-    letter-spacing: 1px;
-    margin-bottom: 8px;
-  }
-  .upload-desc { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px; }
-  .upload-btn {
-    background: var(--red);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 14px 36px;
-    font-family: 'Nunito', sans-serif;
-    font-weight: 700;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.15s;
-  }
-  .upload-btn:hover { background: var(--red-dark); transform: scale(1.03); }
-
+  .upload-section { margin: 0 24px 60px; background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%); border: 2px dashed rgba(229,9,20,0.4); border-radius: 16px; padding: 36px 24px; text-align: center; }
+  .upload-icon { font-size: 3rem; margin-bottom: 14px; }
+  .upload-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 1px; margin-bottom: 8px; }
+  .upload-desc { color: var(--text-muted); font-size: 0.88rem; margin-bottom: 20px; line-height: 1.5; }
+  .upload-btn { background: var(--red); color: white; border: none; border-radius: 8px; padding: 14px 32px; font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: background 0.2s; }
+  .upload-btn:hover { background: var(--red-dark); }
+  .upload-btn:disabled { background: #555; cursor: not-allowed; }
   #fileInput { display: none; }
 
-  /* FOOTER */
-  footer {
-    border-top: 1px solid var(--surface2);
-    padding: 40px 48px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .footer-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.5rem;
-    color: var(--red);
-  }
-  .footer-text { color: var(--text-muted); font-size: 0.82rem; }
+  .progress-bar-wrap { background: var(--surface3); border-radius: 10px; height: 8px; margin: 16px 0; overflow: hidden; display: none; }
+  .progress-bar { height: 100%; background: var(--red); border-radius: 10px; width: 0%; transition: width 0.3s; }
+  .upload-status { font-size: 0.88rem; color: var(--text-muted); margin-top: 8px; }
 
-  /* SCROLLBAR */
+  /* MY UPLOADS SECTION */
+  .my-uploads-section { margin: 0 24px 40px; }
+  .my-uploads-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 1px; margin-bottom: 16px; }
+  #myUploadsGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
+  .empty-uploads { color: var(--text-muted); font-size: 0.88rem; text-align: center; padding: 30px; }
+
+  /* MODAL */
+  .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 9000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
+  .modal-backdrop.open { display: flex; }
+  .modal-box { background: var(--surface); border-radius: 14px; overflow: hidden; width: 95%; max-width: 820px; box-shadow: 0 30px 100px rgba(0,0,0,0.9); animation: modalIn 0.3s ease; }
+  @keyframes modalIn { from { opacity: 0; transform: scale(0.92) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+  .modal-video { width: 100%; aspect-ratio: 16/9; background: #000; }
+  .modal-video iframe, .modal-video video { width: 100%; height: 100%; border: none; }
+  .modal-info { padding: 20px 24px 24px; }
+  .modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 1px; margin-bottom: 8px; }
+  .modal-desc { color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; margin-bottom: 16px; }
+  .modal-actions { display: flex; gap: 10px; align-items: center; }
+  .modal-close { margin-left: auto; background: var(--surface3); border: none; color: var(--text-muted); padding: 9px 18px; border-radius: 8px; cursor: pointer; font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 0.82rem; transition: background 0.2s; }
+  .modal-close:hover { background: var(--surface2); color: var(--text); }
+
+  footer { border-top: 1px solid var(--surface2); padding: 30px 24px; display: flex; align-items: center; justify-content: space-between; }
+  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: var(--red); }
+  .footer-text { color: var(--text-muted); font-size: 0.8rem; }
+
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 3px; }
@@ -504,13 +130,12 @@
     <li><a href="#" class="active">Home</a></li>
     <li><a href="#">Movies</a></li>
     <li><a href="#">TV Shows</a></li>
-    <li><a href="#">My List</a></li>
     <li><a href="#upload-section">Upload</a></li>
   </ul>
   <div class="nav-right">
     <div class="search-bar">
-      <span class="search-icon">🔍</span>
-      <input type="text" placeholder="Search videos..." id="searchInput">
+      <span>🔍</span>
+      <input type="text" placeholder="Search..." id="searchInput">
     </div>
     <div class="avatar">R</div>
   </div>
@@ -528,54 +153,49 @@
       <span class="hero-genre">Action</span>
       <span class="hero-genre">Drama</span>
     </div>
-    <p class="hero-desc">Breathtaking visuals, unforgettable stories. Your personal streaming platform — upload, watch, and share videos with the world.</p>
+    <p class="hero-desc">Apna video upload karo aur duniya ko dikhao — your personal streaming platform!</p>
     <div class="hero-buttons">
-      <button class="btn-play" onclick="openModal('featured')">▶ Play Now</button>
+      <button class="btn-play" onclick="openModal('v1')">▶ Play Now</button>
       <button class="btn-info">ℹ More Info</button>
     </div>
   </div>
 </section>
 
-<!-- MAIN CONTENT -->
+<!-- SECTIONS -->
 <div class="sections">
-
-  <!-- TRENDING -->
   <div class="section">
     <div class="section-header">
       <h2 class="section-title">🔥 Trending Now</h2>
-      <a class="section-see-all">See All →</a>
+      <span class="section-see-all">See All →</span>
     </div>
     <div class="video-row" id="trendingRow"></div>
   </div>
-
-  <!-- TOP PICKS -->
-  <div class="section">
-    <div class="section-header">
-      <h2 class="section-title">⭐ Top Picks For You</h2>
-      <a class="section-see-all">See All →</a>
-    </div>
-    <div class="featured-row" id="featuredRow"></div>
-  </div>
-
-  <!-- NEW RELEASES -->
   <div class="section">
     <div class="section-header">
       <h2 class="section-title">🆕 New Releases</h2>
-      <a class="section-see-all">See All →</a>
+      <span class="section-see-all">See All →</span>
     </div>
     <div class="video-row" id="newRow"></div>
   </div>
+</div>
 
+<!-- MY UPLOADS -->
+<div class="my-uploads-section" id="myUploadsSection" style="display:none;">
+  <h2 class="my-uploads-title">📤 Meri Uploads</h2>
+  <div id="myUploadsGrid"></div>
 </div>
 
 <!-- UPLOAD SECTION -->
 <div class="upload-section" id="upload-section">
   <div class="upload-icon">🎬</div>
-  <h2 class="upload-title">Upload Your Video</h2>
-  <p class="upload-desc">Apna video upload karo aur duniya ko dikhao. MP4, MKV, AVI — sab formats supported.</p>
-  <button class="upload-btn" onclick="document.getElementById('fileInput').click()">📤 Choose Video to Upload</button>
+  <h2 class="upload-title">Apna Video Upload Karo</h2>
+  <p class="upload-desc">MP4, MKV, AVI — sab formats supported.<br>Video Cloudinary pe save hoga permanently!</p>
+  <button class="upload-btn" id="uploadBtn" onclick="document.getElementById('fileInput').click()">📤 Video Choose Karo</button>
   <input type="file" id="fileInput" accept="video/*" onchange="handleUpload(event)">
-  <div id="uploadPreview" style="margin-top:24px;"></div>
+  <div class="progress-bar-wrap" id="progressWrap">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+  <div class="upload-status" id="uploadStatus"></div>
 </div>
 
 <!-- FOOTER -->
@@ -584,16 +204,15 @@
   <div class="footer-text">© 2024 StreamFlix · Your Personal Streaming Platform</div>
 </footer>
 
-<!-- VIDEO MODAL -->
+<!-- MODAL -->
 <div class="modal-backdrop" id="modal">
   <div class="modal-box">
     <div class="modal-video" id="modalVideo"></div>
     <div class="modal-info">
-      <div class="modal-title" id="modalTitle">Video Title</div>
-      <div class="modal-desc" id="modalDesc">Description here</div>
+      <div class="modal-title" id="modalTitle">Video</div>
+      <div class="modal-desc" id="modalDesc">Description</div>
       <div class="modal-actions">
-        <button class="btn-play" style="font-size:0.85rem;padding:10px 22px;">▶ Play</button>
-        <button class="btn-info" style="font-size:0.85rem;padding:10px 18px;">+ My List</button>
+        <button class="btn-play" style="font-size:0.82rem;padding:9px 18px;">▶ Play</button>
         <button class="modal-close" onclick="closeModal()">✕ Close</button>
       </div>
     </div>
@@ -601,74 +220,169 @@
 </div>
 
 <script>
-  // VIDEO DATA
+  // CLOUDINARY CONFIG
+  const CLOUD_NAME = 'dxtr1trza';
+  const UPLOAD_PRESET = 'streamflix_upload';
+
+  // DEMO VIDEOS
   const videos = {
     trending: [
-      { id:'v1', title:'Nature Cinematic 4K', year:'2024', rating:'9.2', genre:'Documentary', thumb:'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80', ytId:'BHACKCNDMW8', desc:'Stunning 4K nature footage from around the world.' },
+      { id:'v1', title:'Nature Cinematic 4K', year:'2024', rating:'9.2', genre:'Documentary', thumb:'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80', ytId:'BHACKCNDMW8', desc:'Stunning 4K nature footage.' },
       { id:'v2', title:'City Timelapse', year:'2024', rating:'8.7', genre:'Short Film', thumb:'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=400&q=80', ytId:'gGkPJKMPZgc', desc:'Beautiful city lights from dusk to dawn.' },
-      { id:'v3', title:'Ocean Depths', year:'2023', rating:'9.0', genre:'Nature', thumb:'https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=400&q=80', ytId:'KDSk7WMqh3k', desc:'Dive into the mysterious world of the deep ocean.' },
-      { id:'v4', title:'Mountain Trek', year:'2024', rating:'8.5', genre:'Adventure', thumb:'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&q=80', ytId:'BHACKCNDMW8', desc:'Epic journey through the highest mountain ranges.' },
-      { id:'v5', title:'Space Wonders', year:'2024', rating:'9.5', genre:'Science', thumb:'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=400&q=80', ytId:'gGkPJKMPZgc', desc:'A breathtaking tour of our solar system.' },
-    ],
-    featured: [
-      { id:'f1', title:'Epic Landscapes', year:'2024', rating:'9.3', genre:'Documentary', thumb:'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80', ytId:'BHACKCNDMW8', desc:'The most stunning landscapes on Earth.' },
-      { id:'f2', title:'Urban Stories', year:'2024', rating:'8.8', genre:'Drama', thumb:'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=400&q=80', ytId:'gGkPJKMPZgc', desc:'Stories from the heart of the city.' },
-      { id:'f3', title:'Wild Africa', year:'2023', rating:'9.1', genre:'Nature', thumb:'https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=400&q=80', ytId:'KDSk7WMqh3k', desc:'Wildlife in its most raw and beautiful form.' },
+      { id:'v3', title:'Ocean Depths', year:'2023', rating:'9.0', genre:'Nature', thumb:'https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=400&q=80', ytId:'KDSk7WMqh3k', desc:'Dive into the deep ocean.' },
+      { id:'v4', title:'Mountain Trek', year:'2024', rating:'8.5', genre:'Adventure', thumb:'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&q=80', ytId:'BHACKCNDMW8', desc:'Epic mountain journey.' },
     ],
     newReleases: [
-      { id:'n1', title:'Neon Nights', year:'2024', rating:'8.6', genre:'Thriller', thumb:'https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=400&q=80', ytId:'gGkPJKMPZgc', desc:'A noir thriller set in a glowing metropolis.' },
-      { id:'n2', title:'Desert Wind', year:'2024', rating:'8.9', genre:'Drama', thumb:'https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=400&q=80', ytId:'BHACKCNDMW8', desc:'A lone traveler crosses the Sahara on foot.' },
-      { id:'n3', title:'Deep Forest', year:'2024', rating:'8.4', genre:'Adventure', thumb:'https://images.unsplash.com/photo-1448375240586-882707db888b?w=400&q=80', ytId:'KDSk7WMqh3k', desc:'Secrets hidden beneath the ancient canopy.' },
-      { id:'n4', title:'Frozen World', year:'2024', rating:'9.0', genre:'Documentary', thumb:'https://images.unsplash.com/photo-1551244072-5d12893278bc?w=400&q=80', ytId:'gGkPJKMPZgc', desc:'Life on the edge of the Arctic.' },
+      { id:'n1', title:'Neon Nights', year:'2024', rating:'8.6', genre:'Thriller', thumb:'https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=400&q=80', ytId:'gGkPJKMPZgc', desc:'A noir thriller.' },
+      { id:'n2', title:'Desert Wind', year:'2024', rating:'8.9', genre:'Drama', thumb:'https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=400&q=80', ytId:'BHACKCNDMW8', desc:'Crossing the Sahara.' },
+      { id:'n3', title:'Deep Forest', year:'2024', rating:'8.4', genre:'Adventure', thumb:'https://images.unsplash.com/photo-1448375240586-882707db888b?w=400&q=80', ytId:'KDSk7WMqh3k', desc:'Ancient forest secrets.' },
     ]
   };
 
-  let currentVideoData = null;
+  const allVideos = {};
+  [...videos.trending, ...videos.newReleases].forEach(v => allVideos[v.id] = v);
 
-  // RENDER TRENDING CARDS
-  function renderRow(containerId, items) {
-    const el = document.getElementById(containerId);
-    el.innerHTML = items.map(v => `
+  // Load saved uploads from localStorage
+  let myUploads = JSON.parse(localStorage.getItem('streamflix_uploads') || '[]');
+
+  function renderRow(id, items) {
+    document.getElementById(id).innerHTML = items.map(v => `
       <div class="video-card" onclick="openModal('${v.id}')">
         <img class="card-thumb" src="${v.thumb}" alt="${v.title}" loading="lazy">
-        <div class="card-overlay">
-          <div class="play-btn-circle">▶</div>
-        </div>
+        <div class="card-overlay"><div class="play-btn-circle">▶</div></div>
         <div class="card-info">
           <div class="card-title">${v.title}</div>
-          <div class="card-meta">
-            <span class="card-rating">★ ${v.rating}</span>
-            <span>${v.year}</span>
-            <span>${v.genre}</span>
-          </div>
+          <div class="card-meta"><span class="card-rating">★ ${v.rating}</span><span>${v.year}</span></div>
         </div>
-      </div>
-    `).join('');
+      </div>`).join('');
   }
 
-  function renderFeatured(items) {
-    const el = document.getElementById('featuredRow');
-    el.innerHTML = items.map((v, i) => `
-      <div class="featured-card ${i===0?'':''}style="" onclick="openModal('${v.id}')">
-        <img src="${v.thumb}" alt="${v.title}">
-        <div class="featured-label">
-          <div class="featured-label-title">${v.title}</div>
-          <div class="featured-label-sub">★ ${v.rating} · ${v.genre}</div>
+  function renderMyUploads() {
+    if (myUploads.length === 0) {
+      document.getElementById('myUploadsSection').style.display = 'none';
+      return;
+    }
+    document.getElementById('myUploadsSection').style.display = 'block';
+    document.getElementById('myUploadsGrid').innerHTML = myUploads.map(v => `
+      <div class="video-card" onclick="openCloudinaryVideo('${v.url}','${v.title}')">
+        <div style="background:linear-gradient(135deg,#1a0000,#2a0a0a);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;font-size:2rem;">🎬</div>
+        <div class="card-overlay"><div class="play-btn-circle">▶</div></div>
+        <div class="card-info">
+          <div class="card-title">${v.title}</div>
+          <div class="card-meta"><span style="color:var(--red);font-weight:700;">My Upload</span></div>
         </div>
-      </div>
-    `).join('');
+      </div>`).join('');
   }
-
-  // ALL VIDEOS LOOKUP
-  const allVideos = {};
-  [...videos.trending, ...videos.featured, ...videos.newReleases].forEach(v => allVideos[v.id] = v);
 
   function openModal(id) {
-    if (id === 'featured') id = videos.trending[0].id;
     const v = allVideos[id];
     if (!v) return;
-    currentVideoData = v;
     document.getElementById('modalTitle').textContent = v.title;
     document.getElementById('modalDesc').textContent = v.desc;
-    document.getElementById('modalVideo').innerHTML = `
-      <iframe src="https://www.youtube.com/embed/${v.ytId}?autoplay=1
+    document.getElementById('modalVideo').innerHTML = `<iframe src="https://www.youtube.com/embed/${v.ytId}?autoplay=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+    document.getElementById('modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function openCloudinaryVideo(url, title) {
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalDesc').textContent = 'Tumhari upload ki hui video';
+    document.getElementById('modalVideo').innerHTML = `<video controls autoplay src="${url}" style="width:100%;height:100%;"></video>`;
+    document.getElementById('modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+    document.getElementById('modalVideo').innerHTML = '';
+    document.body.style.overflow = '';
+  }
+  document.getElementById('modal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+
+  // CLOUDINARY UPLOAD
+  async function handleUpload(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const btn = document.getElementById('uploadBtn');
+    const progressWrap = document.getElementById('progressWrap');
+    const progressBar = document.getElementById('progressBar');
+    const status = document.getElementById('uploadStatus');
+
+    btn.disabled = true;
+    btn.textContent = '⏳ Uploading...';
+    progressWrap.style.display = 'block';
+    status.textContent = 'Upload ho raha hai — wait karo...';
+
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', UPLOAD_PRESET);
+    formData.append('resource_type', 'video');
+
+    try {
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/video/upload`);
+
+      xhr.upload.onprogress = (e) => {
+        if (e.lengthComputable) {
+          const pct = Math.round((e.loaded / e.total) * 100);
+          progressBar.style.width = pct + '%';
+          status.textContent = `Upload: ${pct}% complete...`;
+        }
+      };
+
+      xhr.onload = () => {
+        const res = JSON.parse(xhr.responseText);
+        if (res.secure_url) {
+          const newVid = {
+            title: file.name.replace(/\.[^/.]+$/, ''),
+            url: res.secure_url,
+            uploadedAt: new Date().toISOString()
+          };
+          myUploads.unshift(newVid);
+          localStorage.setItem('streamflix_uploads', JSON.stringify(myUploads));
+          renderMyUploads();
+          status.textContent = '✅ Upload successful! Library mein add ho gaya!';
+          status.style.color = '#4ade80';
+          btn.textContent = '📤 Aur Video Upload Karo';
+          btn.disabled = false;
+          progressBar.style.width = '100%';
+        } else {
+          throw new Error('Upload failed');
+        }
+      };
+
+      xhr.onerror = () => {
+        status.textContent = '❌ Upload fail hua. Internet check karo.';
+        status.style.color = '#ef4444';
+        btn.disabled = false;
+        btn.textContent = '📤 Video Choose Karo';
+      };
+
+      xhr.send(formData);
+    } catch (err) {
+      status.textContent = '❌ Error: ' + err.message;
+      status.style.color = '#ef4444';
+      btn.disabled = false;
+      btn.textContent = '📤 Video Choose Karo';
+    }
+
+    e.target.value = '';
+  }
+
+  // SEARCH
+  document.getElementById('searchInput').addEventListener('input', function(e) {
+    const q = e.target.value.toLowerCase();
+    document.querySelectorAll('.video-card').forEach(card => {
+      const title = card.querySelector('.card-title')?.textContent.toLowerCase() || '';
+      card.style.display = (!q || title.includes(q)) ? '' : 'none';
+    });
+  });
+
+  // INIT
+  renderRow('trendingRow', videos.trending);
+  renderRow('newRow', videos.newReleases);
+  renderMyUploads();
+</script>
+</body>
+</html>

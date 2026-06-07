@@ -1,1 +1,674 @@
-https://rajraunak2006-maker.github.io/Streamflix/streamflix.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StreamFlix</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #e50914;
+    --red-dark: #b20710;
+    --bg: #0a0a0a;
+    --surface: #141414;
+    --surface2: #1f1f1f;
+    --surface3: #2a2a2a;
+    --text: #ffffff;
+    --text-muted: #a3a3a3;
+    --gold: #f5c518;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Nunito', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* NAVBAR */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 48px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, transparent 100%);
+    backdrop-filter: blur(0px);
+    transition: background 0.3s;
+  }
+  nav.scrolled {
+    background: rgba(10,10,10,0.98);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    color: var(--red);
+    letter-spacing: 2px;
+    text-shadow: 0 0 30px rgba(229,9,20,0.5);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a.active { color: var(--text); }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .search-bar {
+    display: flex;
+    align-items: center;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    padding: 6px 14px;
+    gap: 8px;
+    transition: background 0.2s;
+  }
+  .search-bar:focus-within {
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.3);
+  }
+  .search-bar input {
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-size: 0.85rem;
+    width: 180px;
+    font-family: 'Nunito', sans-serif;
+  }
+  .search-bar input::placeholder { color: var(--text-muted); }
+  .search-icon { color: var(--text-muted); font-size: 1rem; }
+
+  .avatar {
+    width: 36px; height: 36px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, var(--red), #ff6b35);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .avatar:hover { border-color: var(--red); }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    height: 92vh;
+    min-height: 600px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: 
+      linear-gradient(to right, rgba(10,10,10,0.95) 30%, transparent 70%),
+      linear-gradient(to top, rgba(10,10,10,1) 0%, transparent 40%),
+      url('https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=1400&q=80') center/cover;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 48px 80px;
+    max-width: 580px;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(229,9,20,0.2);
+    border: 1px solid rgba(229,9,20,0.4);
+    border-radius: 4px;
+    padding: 5px 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--red);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 5rem;
+    line-height: 0.95;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.8);
+  }
+
+  .hero-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+    font-size: 0.85rem;
+  }
+  .hero-rating { color: var(--gold); font-weight: 700; }
+  .hero-year { color: var(--text-muted); }
+  .hero-genre {
+    background: var(--surface2);
+    border-radius: 4px;
+    padding: 3px 10px;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+
+  .hero-desc {
+    color: rgba(255,255,255,0.75);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 32px;
+    max-width: 460px;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 14px;
+  }
+
+  .btn-play {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--red);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 32px;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: 'Nunito', sans-serif;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-play:hover { background: var(--red-dark); transform: scale(1.03); }
+
+  .btn-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.12);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 8px;
+    padding: 14px 28px;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: 'Nunito', sans-serif;
+    cursor: pointer;
+    transition: background 0.2s;
+    backdrop-filter: blur(10px);
+  }
+  .btn-info:hover { background: rgba(255,255,255,0.2); }
+
+  /* SECTIONS */
+  .sections {
+    padding: 0 48px 80px;
+    position: relative;
+    z-index: 2;
+    margin-top: -60px;
+  }
+
+  .section { margin-bottom: 50px; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+    color: var(--text);
+  }
+
+  .section-see-all {
+    color: var(--red);
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+  }
+  .section-see-all:hover { opacity: 1; }
+
+  .video-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+  }
+
+  .video-card {
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--surface);
+    cursor: pointer;
+    transition: transform 0.25s, box-shadow 0.25s;
+    position: relative;
+    group: true;
+  }
+  .video-card:hover {
+    transform: scale(1.05) translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(229,9,20,0.3);
+    z-index: 10;
+  }
+
+  .card-thumb {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    display: block;
+  }
+
+  .card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.25s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .video-card:hover .card-overlay { opacity: 1; }
+
+  .play-btn-circle {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: rgba(229,9,20,0.9);
+    border: 3px solid white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    transform: scale(0.8);
+    transition: transform 0.2s;
+  }
+  .video-card:hover .play-btn-circle { transform: scale(1); }
+
+  .card-info {
+    padding: 12px 14px 14px;
+  }
+  .card-title {
+    font-weight: 700;
+    font-size: 0.92rem;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+  .card-rating { color: var(--gold); font-weight: 700; }
+
+  /* FEATURED WIDE CARD */
+  .featured-row {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr 1fr;
+    gap: 16px;
+  }
+  .featured-card {
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    aspect-ratio: 16/9;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .featured-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+  }
+  .featured-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .featured-label {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    padding: 30px 18px 16px;
+  }
+  .featured-label-title { font-weight: 700; font-size: 0.95rem; }
+  .featured-label-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 3px; }
+
+  /* VIDEO MODAL */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 9000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+  }
+  .modal-backdrop.open { display: flex; }
+
+  .modal-box {
+    background: var(--surface);
+    border-radius: 14px;
+    overflow: hidden;
+    width: 90%;
+    max-width: 860px;
+    box-shadow: 0 30px 100px rgba(0,0,0,0.9);
+    animation: modalIn 0.3s ease;
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(0.92) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  .modal-video {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #000;
+  }
+  .modal-video iframe {
+    width: 100%; height: 100%;
+    border: none;
+  }
+
+  .modal-info {
+    padding: 24px 28px 28px;
+  }
+  .modal-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .modal-desc {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+  .modal-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .modal-close {
+    margin-left: auto;
+    background: var(--surface3);
+    border: none;
+    color: var(--text-muted);
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    transition: background 0.2s, color 0.2s;
+  }
+  .modal-close:hover { background: var(--surface2); color: var(--text); }
+
+  /* UPLOAD SECTION */
+  .upload-section {
+    margin: 0 48px 60px;
+    background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
+    border: 1px dashed rgba(229,9,20,0.4);
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+  }
+  .upload-icon { font-size: 3rem; margin-bottom: 16px; }
+  .upload-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .upload-desc { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px; }
+  .upload-btn {
+    background: var(--red);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 36px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .upload-btn:hover { background: var(--red-dark); transform: scale(1.03); }
+
+  #fileInput { display: none; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--surface2);
+    padding: 40px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    color: var(--red);
+  }
+  .footer-text { color: var(--text-muted); font-size: 0.82rem; }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="logo">StreamFlix</div>
+  <ul class="nav-links">
+    <li><a href="#" class="active">Home</a></li>
+    <li><a href="#">Movies</a></li>
+    <li><a href="#">TV Shows</a></li>
+    <li><a href="#">My List</a></li>
+    <li><a href="#upload-section">Upload</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="search-bar">
+      <span class="search-icon">🔍</span>
+      <input type="text" placeholder="Search videos..." id="searchInput">
+    </div>
+    <div class="avatar">R</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">⚡ Now Streaming</div>
+    <h1 class="hero-title">CINEMATIC<br>EXPERIENCE</h1>
+    <div class="hero-meta">
+      <span class="hero-rating">★ 9.1</span>
+      <span class="hero-year">2024</span>
+      <span class="hero-genre">Action</span>
+      <span class="hero-genre">Drama</span>
+    </div>
+    <p class="hero-desc">Breathtaking visuals, unforgettable stories. Your personal streaming platform — upload, watch, and share videos with the world.</p>
+    <div class="hero-buttons">
+      <button class="btn-play" onclick="openModal('featured')">▶ Play Now</button>
+      <button class="btn-info">ℹ More Info</button>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="sections">
+
+  <!-- TRENDING -->
+  <div class="section">
+    <div class="section-header">
+      <h2 class="section-title">🔥 Trending Now</h2>
+      <a class="section-see-all">See All →</a>
+    </div>
+    <div class="video-row" id="trendingRow"></div>
+  </div>
+
+  <!-- TOP PICKS -->
+  <div class="section">
+    <div class="section-header">
+      <h2 class="section-title">⭐ Top Picks For You</h2>
+      <a class="section-see-all">See All →</a>
+    </div>
+    <div class="featured-row" id="featuredRow"></div>
+  </div>
+
+  <!-- NEW RELEASES -->
+  <div class="section">
+    <div class="section-header">
+      <h2 class="section-title">🆕 New Releases</h2>
+      <a class="section-see-all">See All →</a>
+    </div>
+    <div class="video-row" id="newRow"></div>
+  </div>
+
+</div>
+
+<!-- UPLOAD SECTION -->
+<div class="upload-section" id="upload-section">
+  <div class="upload-icon">🎬</div>
+  <h2 class="upload-title">Upload Your Video</h2>
+  <p class="upload-desc">Apna video upload karo aur duniya ko dikhao. MP4, MKV, AVI — sab formats supported.</p>
+  <button class="upload-btn" onclick="document.getElementById('fileInput').click()">📤 Choose Video to Upload</button>
+  <input type="file" id="fileInput" accept="video/*" onchange="handleUpload(event)">
+  <div id="uploadPreview" style="margin-top:24px;"></div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">StreamFlix</div>
+  <div class="footer-text">© 2024 StreamFlix · Your Personal Streaming Platform</div>
+</footer>
+
+<!-- VIDEO MODAL -->
+<div class="modal-backdrop" id="modal">
+  <div class="modal-box">
+    <div class="modal-video" id="modalVideo"></div>
+    <div class="modal-info">
+      <div class="modal-title" id="modalTitle">Video Title</div>
+      <div class="modal-desc" id="modalDesc">Description here</div>
+      <div class="modal-actions">
+        <button class="btn-play" style="font-size:0.85rem;padding:10px 22px;">▶ Play</button>
+        <button class="btn-info" style="font-size:0.85rem;padding:10px 18px;">+ My List</button>
+        <button class="modal-close" onclick="closeModal()">✕ Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // VIDEO DATA
+  const videos = {
+    trending: [
+      { id:'v1', title:'Nature Cinematic 4K', year:'2024', rating:'9.2', genre:'Documentary', thumb:'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80', ytId:'BHACKCNDMW8', desc:'Stunning 4K nature footage from around the world.' },
+      { id:'v2', title:'City Timelapse', year:'2024', rating:'8.7', genre:'Short Film', thumb:'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=400&q=80', ytId:'gGkPJKMPZgc', desc:'Beautiful city lights from dusk to dawn.' },
+      { id:'v3', title:'Ocean Depths', year:'2023', rating:'9.0', genre:'Nature', thumb:'https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=400&q=80', ytId:'KDSk7WMqh3k', desc:'Dive into the mysterious world of the deep ocean.' },
+      { id:'v4', title:'Mountain Trek', year:'2024', rating:'8.5', genre:'Adventure', thumb:'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&q=80', ytId:'BHACKCNDMW8', desc:'Epic journey through the highest mountain ranges.' },
+      { id:'v5', title:'Space Wonders', year:'2024', rating:'9.5', genre:'Science', thumb:'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=400&q=80', ytId:'gGkPJKMPZgc', desc:'A breathtaking tour of our solar system.' },
+    ],
+    featured: [
+      { id:'f1', title:'Epic Landscapes', year:'2024', rating:'9.3', genre:'Documentary', thumb:'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80', ytId:'BHACKCNDMW8', desc:'The most stunning landscapes on Earth.' },
+      { id:'f2', title:'Urban Stories', year:'2024', rating:'8.8', genre:'Drama', thumb:'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=400&q=80', ytId:'gGkPJKMPZgc', desc:'Stories from the heart of the city.' },
+      { id:'f3', title:'Wild Africa', year:'2023', rating:'9.1', genre:'Nature', thumb:'https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=400&q=80', ytId:'KDSk7WMqh3k', desc:'Wildlife in its most raw and beautiful form.' },
+    ],
+    newReleases: [
+      { id:'n1', title:'Neon Nights', year:'2024', rating:'8.6', genre:'Thriller', thumb:'https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=400&q=80', ytId:'gGkPJKMPZgc', desc:'A noir thriller set in a glowing metropolis.' },
+      { id:'n2', title:'Desert Wind', year:'2024', rating:'8.9', genre:'Drama', thumb:'https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=400&q=80', ytId:'BHACKCNDMW8', desc:'A lone traveler crosses the Sahara on foot.' },
+      { id:'n3', title:'Deep Forest', year:'2024', rating:'8.4', genre:'Adventure', thumb:'https://images.unsplash.com/photo-1448375240586-882707db888b?w=400&q=80', ytId:'KDSk7WMqh3k', desc:'Secrets hidden beneath the ancient canopy.' },
+      { id:'n4', title:'Frozen World', year:'2024', rating:'9.0', genre:'Documentary', thumb:'https://images.unsplash.com/photo-1551244072-5d12893278bc?w=400&q=80', ytId:'gGkPJKMPZgc', desc:'Life on the edge of the Arctic.' },
+    ]
+  };
+
+  let currentVideoData = null;
+
+  // RENDER TRENDING CARDS
+  function renderRow(containerId, items) {
+    const el = document.getElementById(containerId);
+    el.innerHTML = items.map(v => `
+      <div class="video-card" onclick="openModal('${v.id}')">
+        <img class="card-thumb" src="${v.thumb}" alt="${v.title}" loading="lazy">
+        <div class="card-overlay">
+          <div class="play-btn-circle">▶</div>
+        </div>
+        <div class="card-info">
+          <div class="card-title">${v.title}</div>
+          <div class="card-meta">
+            <span class="card-rating">★ ${v.rating}</span>
+            <span>${v.year}</span>
+            <span>${v.genre}</span>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function renderFeatured(items) {
+    const el = document.getElementById('featuredRow');
+    el.innerHTML = items.map((v, i) => `
+      <div class="featured-card ${i===0?'':''}style="" onclick="openModal('${v.id}')">
+        <img src="${v.thumb}" alt="${v.title}">
+        <div class="featured-label">
+          <div class="featured-label-title">${v.title}</div>
+          <div class="featured-label-sub">★ ${v.rating} · ${v.genre}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // ALL VIDEOS LOOKUP
+  const allVideos = {};
+  [...videos.trending, ...videos.featured, ...videos.newReleases].forEach(v => allVideos[v.id] = v);
+
+  function openModal(id) {
+    if (id === 'featured') id = videos.trending[0].id;
+    const v = allVideos[id];
+    if (!v) return;
+    currentVideoData = v;
+    document.getElementById('modalTitle').textContent = v.title;
+    document.getElementById('modalDesc').textContent = v.desc;
+    document.getElementById('modalVideo').innerHTML = `
+      <iframe src="https://www.youtube.com/embed/${v.ytId}?autoplay=1

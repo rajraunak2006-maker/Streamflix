@@ -137,7 +137,7 @@
     <li><a href="#" class="active">Home</a></li>
     <li><a href="#">Movies</a></li>
     <li><a href="#">TV Shows</a></li>
-    <li><a href="#upload-section">Upload</a></li>
+    <li><a href="#upload-locked">Upload</a></li>
   </ul>
   <div class="nav-right">
     <div class="search-bar">
@@ -193,7 +193,14 @@
 </div>
 
 <!-- UPLOAD SECTION -->
-<div class="upload-section" id="upload-section">
+<div class="upload-section" id="upload-locked">
+  <div class="upload-icon">🔒</div>
+  <h2 class="upload-title">Admin Upload Area</h2>
+  <p class="upload-desc">Yeh section sirf admin ke liye hai.<br>Password enter karo upload karne ke liye.</p>
+  <button class="upload-btn" onclick="checkUploadPassword()">🔓 Unlock Upload</button>
+</div>
+
+<div class="upload-section" id="upload-section" style="display:none;">
   <div class="upload-icon">🎬</div>
   <h2 class="upload-title">Apna Video Upload Karo</h2>
   <p class="upload-desc">MP4, MKV, AVI — sab formats supported.<br>Video Cloudinary pe save hoga permanently!</p>
@@ -385,6 +392,18 @@
       card.style.display = (!q || title.includes(q)) ? '' : 'none';
     });
   });
+
+  // PASSWORD PROTECTION
+  const UPLOAD_PASSWORD = "raunak9999";
+  function checkUploadPassword() {
+    const pass = prompt("Upload password enter karo:");
+    if (pass === UPLOAD_PASSWORD) {
+      document.getElementById('upload-locked').style.display = 'none';
+      document.getElementById('upload-section').style.display = 'block';
+    } else if (pass !== null) {
+      alert("Galat password! Sirf admin upload kar sakta hai.");
+    }
+  }
 
   // INIT
   renderRow('trendingRow', videos.trending);
